@@ -3,6 +3,7 @@ package hu.nye.futarfalatok.entity;
 import hu.nye.futarfalatok.enums.Coupon;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,6 +38,7 @@ public class User {
     @Column(name = "is_admin", nullable = false)
     private Boolean isAdmin;
 
+    @Size(min = 11, max = 11, message = "Phone number must be exactly 11 digits long")
     @NotBlank
     @Column(name = "phone_number")
     private String phoneNumber;
