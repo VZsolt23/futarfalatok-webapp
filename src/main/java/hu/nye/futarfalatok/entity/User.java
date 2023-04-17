@@ -1,21 +1,29 @@
 package hu.nye.futarfalatok.entity;
 
 import hu.nye.futarfalatok.enums.Coupon;
+import hu.nye.futarfalatok.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "user")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,14 +43,15 @@ public class User {
     @NotBlank
     private String password;
 
-    @Column(name = "is_admin", nullable = false)
-    private Boolean isAdmin;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Size(min = 11, max = 11, message = "Phone number must be exactly 11 digits long")
     @NotBlank
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Enumerated(EnumType.STRING)
     private Set<Coupon> coupons;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -50,4 +59,34 @@ public class User {
 
     @OneToMany(mappedBy = "reviewUserId", cascade = CascadeType.ALL)
     private Set<Review> reviews;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
