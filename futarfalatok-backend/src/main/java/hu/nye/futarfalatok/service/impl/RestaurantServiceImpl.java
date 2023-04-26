@@ -47,35 +47,6 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .map(restaurant -> modelMapper.map(restaurant, RestaurantDTO.class));
     }
 
-    /*@Override
-    public RestaurantDTO assignDishToRestaurant(Long restaurantId, Long dishId) {
-        Set<Dish> dishSet = null;
-
-        Restaurant restaurantOptional = restaurantRepository.findById(restaurantId).get();
-        Dish dishOptional = dishRepository.findById(dishId).get();
-
-        dishSet = restaurantOptional.getDishes();
-        dishSet.add(dishOptional);
-        restaurantOptional.setDishes(dishSet);
-
-        Restaurant savedRestaurant = restaurantRepository.save(restaurantOptional);
-
-        return modelMapper.map(savedRestaurant, RestaurantDTO.class);
-    }*/
-
-    /*@Override
-    public RestaurantDTO assignDishToRestaurant(Long restaurantId, Long dishId) {
-        Restaurant restaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(() -> new RestaurantNotFound("Restaurant not found"));
-        Dish dish = dishRepository.findById(dishId)
-                .orElseThrow(() -> new DishNotFound("Dish not found"));
-
-        restaurant.getDishes().add(dish);
-        Restaurant savedRestaurant = restaurantRepository.save(restaurant);
-
-        return modelMapper.map(savedRestaurant, RestaurantDTO.class);
-    }*/
-
     @Override
     public RestaurantDTO assignDishToTheRestaurant(Long restaurantId, Long dishId) {
         Dish dish = dishRepository.findById(dishId)
