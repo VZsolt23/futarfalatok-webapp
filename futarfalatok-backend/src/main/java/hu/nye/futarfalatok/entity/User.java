@@ -14,6 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -55,10 +56,10 @@ public class User implements UserDetails {
     private Set<Coupon> coupons;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<UserOrder> orders;
+    private Set<UserOrder> orders = new HashSet<>();
 
     @OneToMany(mappedBy = "reviewUserId", cascade = CascadeType.ALL)
-    private Set<Review> reviews;
+    private Set<Review> reviews = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

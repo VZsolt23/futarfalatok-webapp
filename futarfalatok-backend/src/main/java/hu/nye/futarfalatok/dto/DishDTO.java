@@ -4,12 +4,15 @@ import hu.nye.futarfalatok.entity.Restaurant;
 import hu.nye.futarfalatok.entity.UserOrder;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class DishDTO {
@@ -30,8 +33,7 @@ public class DishDTO {
 
     private float fat;
 
-    @NotBlank
-    private Set<Restaurant> restaurantList;
+    private Set<Restaurant> restaurants = new HashSet<>();
 
     private Set<UserOrder> cart;
 }

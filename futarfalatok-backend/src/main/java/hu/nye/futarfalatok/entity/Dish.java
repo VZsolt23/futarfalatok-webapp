@@ -1,16 +1,20 @@
 package hu.nye.futarfalatok.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "dish")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Dish {
@@ -35,14 +39,11 @@ public class Dish {
 
     private float fat;
 
-    @NotBlank
-    @ManyToMany(mappedBy = "dishes")
-    private Set<Restaurant> restaurantList;
+    @ManyToMany(mappedBy = "dishes", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Set<Restaurant> restaurants = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "order_item",
-            joinColumns = {@JoinColumn(name = "dish_id")},
-            inverseJoinColumns = {@JoinColumn(name = "order_id")}
-    )
-    private Set<UserOrder> cart;
+    @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Set<UserOrder> cart = new HashSet<>();
 }

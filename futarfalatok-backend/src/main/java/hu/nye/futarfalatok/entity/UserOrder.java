@@ -1,5 +1,6 @@
 package hu.nye.futarfalatok.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import hu.nye.futarfalatok.enums.Coupon;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -9,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,8 +28,13 @@ public class UserOrder {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToMany(mappedBy = "cart")
-    private Set<Dish> items;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "order_item",
+            joinColumns = {@JoinColumn(name = "order_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "dish_id", referencedColumnName = "id")}
+    )
+    @JsonManagedReference
+    private Set<Dish> items = new HashSet<>();
 
     @NotBlank
     @Column(name = "customer_name")

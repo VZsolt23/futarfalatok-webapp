@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class DeliveryLocationDTO {
     private Long id;
 
-    @NotBlank
     private User userId;
 
     @NotBlank

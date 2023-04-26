@@ -1,18 +1,22 @@
 package hu.nye.futarfalatok.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "restaurant")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Restaurant {
@@ -24,12 +28,13 @@ public class Restaurant {
     @NotBlank
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "dish_restaurant",
-            joinColumns = {@JoinColumn(name = "restaurant_id")},
-            inverseJoinColumns = {@JoinColumn(name = "dish_id")}
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "restaurant_dish",
+            joinColumns = {@JoinColumn(name = "restaurant_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "dish_id", referencedColumnName = "id")}
     )
-    private Set<Dish> dishes;
+    @JsonManagedReference
+    private Set<Dish> dishes = new HashSet<>();
 
     @Min(value = 0)
     @Max(value = 5)

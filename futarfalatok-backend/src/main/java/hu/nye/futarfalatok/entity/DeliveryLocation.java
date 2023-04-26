@@ -17,7 +17,6 @@ public class DeliveryLocation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     @OneToOne
     @JoinColumn(name = "user_id")
     private User userId;

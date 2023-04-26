@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -42,7 +43,7 @@ public class UserDTO {
     @Enumerated(EnumType.STRING)
     private Set<Coupon> coupons;
 
-    private Set<UserOrder> orders;
+    private Set<UserOrder> orders = new HashSet<>();
 
-    private Set<Review> reviews;
+    private Set<Review> reviews = new HashSet<>();
 }
