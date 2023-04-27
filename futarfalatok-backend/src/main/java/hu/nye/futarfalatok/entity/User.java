@@ -55,10 +55,10 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Coupon> coupons;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<UserOrder> orders = new HashSet<>();
 
-    @OneToMany(mappedBy = "reviewUserId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "reviewUserId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Review> reviews = new HashSet<>();
 
     @Override

@@ -1,5 +1,6 @@
 package hu.nye.futarfalatok.jwt;
 
+import hu.nye.futarfalatok.enums.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -23,14 +24,16 @@ public class JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+    public String generateToken(UserDetails userDetails, Role role) {
+        return generateToken(new HashMap<>(), userDetails, role);
     }
 
     public String generateToken(
             Map<String, Object> extraClaims,
-            UserDetails userDetails
+            UserDetails userDetails,
+            Role role
     ) {
+        extraClaims.put("role", role);
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
