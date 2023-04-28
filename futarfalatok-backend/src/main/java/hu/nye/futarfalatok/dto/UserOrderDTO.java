@@ -1,9 +1,8 @@
 package hu.nye.futarfalatok.dto;
 
-import hu.nye.futarfalatok.enums.Coupon;
-import hu.nye.futarfalatok.entity.DeliveryLocation;
 import hu.nye.futarfalatok.entity.Dish;
 import hu.nye.futarfalatok.entity.User;
+import hu.nye.futarfalatok.enums.Coupon;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -26,7 +25,6 @@ public class UserOrderDTO {
     @NotBlank
     private String customerName;
 
-    private DeliveryLocation customerAddress;
 
     private String deliveryTime;
 

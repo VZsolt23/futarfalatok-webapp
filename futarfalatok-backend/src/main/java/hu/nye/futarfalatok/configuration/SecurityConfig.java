@@ -24,37 +24,27 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        /*httpSecurity
-                .csrf()
-                .disable()
-                .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/api/v1/restaurants")
-                .permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/v1/orders").hasRole("ADMIN")
-                .requestMatchers("/api/v1/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);*/
 
         httpSecurity
+                .cors()
+                .and()
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/orders/**").hasRole("ADMIN")
                 /*.requestMatchers("/api/v1/users/**").hasRole("ADMIN")
+                .requestMatchers("/api/v1/users/{userId}").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.GET, "/api/v1/users/{userId}").authenticated()*/
                 .requestMatchers("/api/v1/auth/**")
                 .permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/v1/dishes")
                 .permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/v1/restaurants")
+                .requestMatchers(HttpMethod.GET, "/api/v1/restaurants/**")
                 .permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/restaurants/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/restaurants/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/restaurants/**").hasRole("ADMIN")
+                .requestMatchers("/api/v1/reviews/**").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()

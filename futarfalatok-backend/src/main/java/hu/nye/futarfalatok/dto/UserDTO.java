@@ -1,8 +1,8 @@
 package hu.nye.futarfalatok.dto;
 
-import hu.nye.futarfalatok.enums.Coupon;
 import hu.nye.futarfalatok.entity.Review;
 import hu.nye.futarfalatok.entity.UserOrder;
+import hu.nye.futarfalatok.enums.Coupon;
 import hu.nye.futarfalatok.enums.Role;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

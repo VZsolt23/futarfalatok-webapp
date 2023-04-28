@@ -25,9 +25,9 @@ public class UserController {
         return ResponseEntity.ok(userService.findAllUsers());
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or (#userId == authentication.principal.id)")
-    @GetMapping("/{userId}")
-    public ResponseEntity<UserDTO> givenUser(@PathVariable(name = "userId") Long id) {
+    @PreAuthorize("hasRole('ROLE_ADMIN') or (#id == authentication.principal.id)")
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDTO> givenUser(@PathVariable Long id) {
         Optional<UserDTO> user = userService.findUserById(id);
         return user.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
