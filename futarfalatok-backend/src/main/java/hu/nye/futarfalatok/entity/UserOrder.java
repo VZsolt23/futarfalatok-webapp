@@ -32,6 +32,11 @@ public class UserOrder {
     @JsonBackReference
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    @JsonBackReference
+    private Restaurant restaurant;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "order_item",
             joinColumns = {@JoinColumn(name = "order_id", referencedColumnName = "id")},
@@ -39,10 +44,6 @@ public class UserOrder {
     )
     @JsonManagedReference
     private Set<Dish> items = new HashSet<>();
-
-    @NotBlank
-    @Column(name = "customer_name")
-    private String customerName;
 
     @Column(name = "delivery_time")
     private String deliveryTime;

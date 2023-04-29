@@ -1,6 +1,7 @@
 package hu.nye.futarfalatok.dto;
 
 import hu.nye.futarfalatok.entity.Restaurant;
+import hu.nye.futarfalatok.entity.RestaurantDish;
 import hu.nye.futarfalatok.entity.UserOrder;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -23,8 +24,6 @@ public class DishDTO {
     @NotBlank
     private String name;
 
-    private String imagePath;
-
     private float calories;
 
     private float protein;
@@ -33,7 +32,9 @@ public class DishDTO {
 
     private float fat;
 
-    private Set<Restaurant> restaurants = new HashSet<>();
+    private Set<RestaurantDish> dishItems = new HashSet<>();
 
-    private Set<UserOrder> cart;
+    private int priceOfDish;
+
+    private Set<UserOrder> cart = new HashSet<>();;
 }

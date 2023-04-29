@@ -1,7 +1,7 @@
 package hu.nye.futarfalatok.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import hu.nye.futarfalatok.entity.Dish;
+import hu.nye.futarfalatok.entity.RestaurantDish;
+import hu.nye.futarfalatok.entity.Review;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -23,7 +23,7 @@ public class RestaurantDTO {
     @NotBlank
     private String name;
 
-    private Set<Dish> dishes = new HashSet<>();
+    private Set<RestaurantDish> restaurantItems = new HashSet<>();
 
     @Min(value = 0)
     @Max(value = 5)
@@ -31,4 +31,6 @@ public class RestaurantDTO {
 
     @Min(value = 0)
     private int deliveryFee;
+
+    private Set<Review> restaurant_reviews = new HashSet<>();
 }

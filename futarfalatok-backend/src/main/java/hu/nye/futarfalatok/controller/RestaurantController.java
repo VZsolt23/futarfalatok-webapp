@@ -48,14 +48,14 @@ public class RestaurantController {
                 .body(restaurant);
     }
 
-    @PutMapping("/{restaurantId}/dish/{dishId}")
+    /*@PutMapping("/{restaurantId}/dish/{dishId}")
     public ResponseEntity<RestaurantDTO> assignDishToRestaurant(
             @PathVariable Long restaurantId,
             @PathVariable Long dishId
     ) {
         RestaurantDTO restaurantDTO = restaurantService.assignDishToTheRestaurant(restaurantId, dishId);
         return ResponseEntity.ok(restaurantDTO);
-    }
+    }*/
 
     @PutMapping()
     public ResponseEntity<RestaurantDTO> updateRestaurant(@Valid @RequestBody RestaurantDTO restaurantDTO) {

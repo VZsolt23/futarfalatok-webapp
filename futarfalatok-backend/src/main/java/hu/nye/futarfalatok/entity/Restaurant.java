@@ -29,13 +29,8 @@ public class Restaurant {
     @NotBlank
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "restaurant_dish",
-            joinColumns = {@JoinColumn(name = "restaurant_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "dish_id", referencedColumnName = "id")}
-    )
-    @JsonManagedReference
-    private Set<Dish> dishes = new HashSet<>();
+    @OneToMany(mappedBy = "rest", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<RestaurantDish> restaurantItems = new HashSet<>();
 
     @Min(value = 0)
     @Max(value = 5)
@@ -46,5 +41,5 @@ public class Restaurant {
     private int deliveryFee;
 
     @OneToMany(mappedBy = "restaurantId", cascade = CascadeType.ALL)
-    private Set<Review> restaurant_reviews;
+    private Set<Review> restaurant_reviews = new HashSet<>();
 }

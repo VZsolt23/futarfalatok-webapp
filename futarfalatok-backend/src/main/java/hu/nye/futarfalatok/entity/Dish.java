@@ -1,6 +1,7 @@
 package hu.nye.futarfalatok.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -21,15 +22,13 @@ public class Dish {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonManagedReference
     private Long id;
 
     private Set<String> courses;
 
     @NotBlank
     private String name;
-
-    @Column(name = "image_path")
-    private String imagePath;
 
     private float calories;
 
@@ -39,9 +38,8 @@ public class Dish {
 
     private float fat;
 
-    @ManyToMany(mappedBy = "dishes", fetch = FetchType.LAZY)
-    @JsonBackReference
-    private Set<Restaurant> restaurants = new HashSet<>();
+    @OneToMany(mappedBy = "food", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<RestaurantDish> dishItems = new HashSet<>();
 
     @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
     @JsonBackReference

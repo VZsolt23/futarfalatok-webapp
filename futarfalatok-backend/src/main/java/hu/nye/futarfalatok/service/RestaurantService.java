@@ -13,8 +13,6 @@ public interface RestaurantService {
 
     Optional<RestaurantDTO> findRestaurantById(Long id);
 
-    RestaurantDTO assignDishToTheRestaurant(Long restaurantId, Long dishId);
-
     Optional<Set<DishDTO>> getDishesByRestaurantId(Long restaurantId);
 
     RestaurantDTO createRestaurant(RestaurantDTO restaurantDTO);
