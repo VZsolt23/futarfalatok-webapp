@@ -1,0 +1,14 @@
+.navlink {
+    text-decoration: none;
+    color: white;
+    margin: 10px;
+    text-transform: uppercase;
+}
+
+.navlink:hover {
+    color: rgb(28, 240, 0);
+}
+
+.navlink.active {
+    color: #8eff71;
+  }
