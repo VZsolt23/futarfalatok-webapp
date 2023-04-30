@@ -1,7 +1,6 @@
 package hu.nye.futarfalatok.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import hu.nye.futarfalatok.enums.Coupon;
 import hu.nye.futarfalatok.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -51,9 +50,6 @@ public class User implements UserDetails {
     @NotBlank
     @Column(name = "phone_number")
     private String phoneNumber;
-
-    @Enumerated(EnumType.STRING)
-    private Set<Coupon> coupons;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<UserOrder> orders = new HashSet<>();

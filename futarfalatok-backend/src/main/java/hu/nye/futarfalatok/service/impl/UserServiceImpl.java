@@ -1,6 +1,7 @@
 package hu.nye.futarfalatok.service.impl;
 
 import hu.nye.futarfalatok.dto.UserDTO;
+import hu.nye.futarfalatok.dto.UserRequestDTO;
 import hu.nye.futarfalatok.entity.User;
 import hu.nye.futarfalatok.exception.UserNotFound;
 import hu.nye.futarfalatok.repository.UserRepository;
@@ -46,16 +47,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO updateUser(UserDTO userDTO) {
-        Long id = userDTO.getId();
-        Optional<User> user = userRepository.findById(id);
+    public UserDTO updateUser(UserRequestDTO userRequestDTO) {
+        Long id = userRequestDTO.getId();
+        User user = userRepository.findById(id).get();
 
-        if (user.isEmpty()) {
-            throw new UserNotFound("Given user is not found: " + id);
-        }
+        String phoneNumber = userRequestDTO.getPhoneNumber();
 
-        User updateUser = modelMapper.map(userDTO, User.class);
-        User savedUser = userRepository.save(updateUser);
+        user.setFirstName(userRequestDTO.getFirstName());
+        user.setLastName(userRequestDTO.getLastName());
+        user.setEmail(userRequestDTO.getEmail());
+        user.setRole(userRequestDTO.getRole());
+        user.setPhoneNumber(userRequestDTO.getPhoneNumber());
+
+        User savedUser = userRepository.save(user);
 
         return modelMapper.map(savedUser, UserDTO.class);
     }

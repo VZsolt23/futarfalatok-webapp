@@ -2,6 +2,7 @@ package hu.nye.futarfalatok.controller;
 
 import hu.nye.futarfalatok.dto.DishDTO;
 import hu.nye.futarfalatok.dto.RestaurantDTO;
+import hu.nye.futarfalatok.dto.RestaurantRequestDTO;
 import hu.nye.futarfalatok.service.DishService;
 import hu.nye.futarfalatok.service.RestaurantService;
 import jakarta.validation.Valid;
@@ -42,23 +43,14 @@ public class RestaurantController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<RestaurantDTO> createRestaurant(@Valid @RequestBody RestaurantDTO restaurantDTO) {
+    public ResponseEntity<RestaurantDTO> createRestaurant(@Valid @RequestBody RestaurantRequestDTO restaurantDTO) {
         RestaurantDTO restaurant = restaurantService.createRestaurant(restaurantDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(restaurant);
     }
 
-    /*@PutMapping("/{restaurantId}/dish/{dishId}")
-    public ResponseEntity<RestaurantDTO> assignDishToRestaurant(
-            @PathVariable Long restaurantId,
-            @PathVariable Long dishId
-    ) {
-        RestaurantDTO restaurantDTO = restaurantService.assignDishToTheRestaurant(restaurantId, dishId);
-        return ResponseEntity.ok(restaurantDTO);
-    }*/
-
     @PutMapping()
-    public ResponseEntity<RestaurantDTO> updateRestaurant(@Valid @RequestBody RestaurantDTO restaurantDTO) {
+    public ResponseEntity<RestaurantDTO> updateRestaurant(@Valid @RequestBody RestaurantRequestDTO restaurantDTO) {
         RestaurantDTO restaurant = restaurantService.updateRestaurant(restaurantDTO);
         return ResponseEntity.ok(restaurant);
     }

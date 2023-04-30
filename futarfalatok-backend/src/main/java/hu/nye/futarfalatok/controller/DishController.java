@@ -1,6 +1,7 @@
 package hu.nye.futarfalatok.controller;
 
 import hu.nye.futarfalatok.dto.DishDTO;
+import hu.nye.futarfalatok.dto.DishRequestDTO;
 import hu.nye.futarfalatok.service.DishService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -33,15 +34,15 @@ public class DishController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<DishDTO> createDish(@Valid @RequestBody DishDTO dishDTO) {
-        DishDTO dish = dishService.createDish(dishDTO);
+    public ResponseEntity<DishDTO> createDish(@Valid @RequestBody DishRequestDTO dishRequestDTO) {
+        DishDTO dish = dishService.createDish(dishRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(dish);
     }
 
     @PutMapping()
-    public ResponseEntity<DishDTO> updateDish(@Valid @RequestBody DishDTO dishDTO) {
-        DishDTO dish = dishService.updateDish(dishDTO);
+    public ResponseEntity<DishDTO> updateDish(@Valid @RequestBody DishRequestDTO dishRequestDTO) {
+        DishDTO dish = dishService.updateDish(dishRequestDTO);
         return ResponseEntity.ok(dish);
     }
 

@@ -1,6 +1,7 @@
 package hu.nye.futarfalatok.service;
 
 import hu.nye.futarfalatok.dto.DishDTO;
+import hu.nye.futarfalatok.dto.DishRequestDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,9 +12,9 @@ public interface DishService {
 
     Optional<DishDTO> findDishById(Long id);
 
-    DishDTO createDish(DishDTO dishDTO);
+    DishDTO createDish(DishRequestDTO dishRequestDTO);
 
-    DishDTO updateDish(DishDTO dishDTO);
+    DishDTO updateDish(DishRequestDTO dishRequestDTO);
 
     void deleteDish(Long id);
 }

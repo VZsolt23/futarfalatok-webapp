@@ -1,6 +1,5 @@
 package hu.nye.futarfalatok.dto;
 
-import hu.nye.futarfalatok.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,12 +9,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReviewDTO {
-    private Long id;
+public class ReviewRequestDTO {
 
-    private User reviewUserId;
+    private Long userId;
 
-    private long restaurantId;
+    private Long restaurantId;
 
-    private String body;
+    private String comment;
 }

@@ -25,7 +25,7 @@ public class Dish {
     @JsonManagedReference
     private Long id;
 
-    private Set<String> courses;
+    private String course;
 
     @NotBlank
     private String name;

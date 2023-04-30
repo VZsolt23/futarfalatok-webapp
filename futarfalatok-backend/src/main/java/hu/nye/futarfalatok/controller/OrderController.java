@@ -1,6 +1,7 @@
 package hu.nye.futarfalatok.controller;
 
 import hu.nye.futarfalatok.dto.DishDTO;
+import hu.nye.futarfalatok.dto.OrderRequestDTO;
 import hu.nye.futarfalatok.dto.UserOrderDTO;
 import hu.nye.futarfalatok.service.DishService;
 import hu.nye.futarfalatok.service.UserOrderService;
@@ -43,8 +44,8 @@ public class OrderController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<UserOrderDTO> createOrder(@Valid @RequestBody UserOrderDTO userOrderDTO) {
-        UserOrderDTO order = userOrderService.createUserOrder(userOrderDTO);
+    public ResponseEntity<UserOrderDTO> createOrder(@RequestBody OrderRequestDTO orderRequestDTO) {
+        UserOrderDTO order = userOrderService.createUserOrder(orderRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(order);
     }

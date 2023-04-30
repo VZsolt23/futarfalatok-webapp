@@ -1,6 +1,7 @@
 package hu.nye.futarfalatok.controller;
 
 import hu.nye.futarfalatok.dto.UserDTO;
+import hu.nye.futarfalatok.dto.UserRequestDTO;
 import hu.nye.futarfalatok.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,8 @@ public class UserController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping()
-    public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO) {
-        UserDTO user = userService.updateUser(userDTO);
+    public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+        UserDTO user = userService.updateUser(userRequestDTO);
         return ResponseEntity.ok(user);
     }
 

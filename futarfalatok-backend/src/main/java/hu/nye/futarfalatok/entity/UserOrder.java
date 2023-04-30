@@ -2,10 +2,8 @@ package hu.nye.futarfalatok.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import hu.nye.futarfalatok.enums.Coupon;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,7 +35,7 @@ public class UserOrder {
     @JsonBackReference
     private Restaurant restaurant;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "order_item",
             joinColumns = {@JoinColumn(name = "order_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "dish_id", referencedColumnName = "id")}
@@ -47,8 +45,6 @@ public class UserOrder {
 
     @Column(name = "delivery_time")
     private String deliveryTime;
-
-    private Coupon coupon;
 
     @Min(value = 0)
     @Column(name = "price")

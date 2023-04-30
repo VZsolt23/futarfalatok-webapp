@@ -1,6 +1,7 @@
 package hu.nye.futarfalatok.controller;
 
 import hu.nye.futarfalatok.dto.ReviewDTO;
+import hu.nye.futarfalatok.dto.ReviewRequestDTO;
 import hu.nye.futarfalatok.service.ReviewService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -33,8 +34,8 @@ public class ReviewController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ReviewDTO> createReview(@Valid @RequestBody ReviewDTO reviewDTO) {
-        ReviewDTO review = reviewService.createReview(reviewDTO);
+    public ResponseEntity<ReviewDTO> createReview(@Valid @RequestBody ReviewRequestDTO reviewRequestDTO) {
+        ReviewDTO review = reviewService.createReview(reviewRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(review);
     }

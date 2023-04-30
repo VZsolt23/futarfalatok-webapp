@@ -1,7 +1,5 @@
 package hu.nye.futarfalatok.dto;
 
-import hu.nye.futarfalatok.entity.Review;
-import hu.nye.futarfalatok.entity.UserOrder;
 import hu.nye.futarfalatok.enums.Role;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -12,14 +10,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class UserRequestDTO {
     private Long id;
 
     @NotBlank
@@ -31,17 +26,10 @@ public class UserDTO {
     @NotBlank
     private String email;
 
-    @NotBlank
-    private String password;
-
     @Enumerated(EnumType.STRING)
     private Role role;
 
     @Size(min = 11, max = 11, message = "Phone number must be exactly 11 digits long")
     @NotBlank
     private String phoneNumber;
-
-    private Set<UserOrder> orders = new HashSet<>();
-
-    private Set<Review> reviews = new HashSet<>();
 }

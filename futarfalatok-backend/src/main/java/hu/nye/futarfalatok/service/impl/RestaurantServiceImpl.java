@@ -2,6 +2,7 @@ package hu.nye.futarfalatok.service.impl;
 
 import hu.nye.futarfalatok.dto.DishDTO;
 import hu.nye.futarfalatok.dto.RestaurantDTO;
+import hu.nye.futarfalatok.dto.RestaurantRequestDTO;
 import hu.nye.futarfalatok.entity.Restaurant;
 import hu.nye.futarfalatok.entity.RestaurantDish;
 import hu.nye.futarfalatok.exception.RestaurantNotFound;
@@ -63,24 +64,28 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public RestaurantDTO createRestaurant(RestaurantDTO restaurantDTO) {
-        Restaurant restaurant = modelMapper.map(restaurantDTO, Restaurant.class);
-        Restaurant savedRestaurant = restaurantRepository.save(restaurant);
+    public RestaurantDTO createRestaurant(RestaurantRequestDTO restaurantRequestDTO) {
+
+        Restaurant newRestaurant = new Restaurant();
+        newRestaurant.setName(restaurantRequestDTO.getName());
+        newRestaurant.setRating(restaurantRequestDTO.getRating());
+        newRestaurant.setDeliveryFee(restaurantRequestDTO.getDeliveryFee());
+
+        Restaurant savedRestaurant = restaurantRepository.save(newRestaurant);
 
         return modelMapper.map(savedRestaurant, RestaurantDTO.class);
     }
 
     @Override
-    public RestaurantDTO updateRestaurant(RestaurantDTO restaurantDTO) {
-        Long id = restaurantDTO.getId();
-        Optional<Restaurant> restaurant = restaurantRepository.findById(id);
+    public RestaurantDTO updateRestaurant(RestaurantRequestDTO restaurantRequestDTO) {
+        Long id = restaurantRequestDTO.getId();
+        Restaurant restaurant = restaurantRepository.findById(id).get();
 
-        if (restaurant.isEmpty()) {
-            throw new RestaurantNotFound("Given restaurant is not found: " + id);
-        }
+        restaurant.setName(restaurantRequestDTO.getName());
+        restaurant.setRating(restaurantRequestDTO.getRating());
+        restaurant.setDeliveryFee(restaurantRequestDTO.getDeliveryFee());
 
-        Restaurant updateRestaurant = modelMapper.map(restaurantDTO, Restaurant.class);
-        Restaurant savedRestaurant = restaurantRepository.save(updateRestaurant);
+        Restaurant savedRestaurant = restaurantRepository.save(restaurant);
 
         return modelMapper.map(savedRestaurant, RestaurantDTO.class);
     }

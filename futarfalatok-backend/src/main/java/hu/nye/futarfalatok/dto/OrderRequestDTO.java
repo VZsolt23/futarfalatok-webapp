@@ -1,21 +1,23 @@
 package hu.nye.futarfalatok.dto;
 
-import hu.nye.futarfalatok.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReviewDTO {
-    private Long id;
+public class OrderRequestDTO {
 
-    private User reviewUserId;
+    private Long userId;
 
-    private long restaurantId;
+    private Long restaurantId;
 
-    private String body;
+    private int price;
+
+    private List<Long> dishes;
 }

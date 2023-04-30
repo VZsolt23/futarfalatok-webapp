@@ -2,8 +2,6 @@ package hu.nye.futarfalatok.controller;
 
 import hu.nye.futarfalatok.dto.RestaurantDishDTO;
 import hu.nye.futarfalatok.service.RestaurantDishService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

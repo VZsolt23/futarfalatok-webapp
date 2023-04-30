@@ -2,6 +2,7 @@ package hu.nye.futarfalatok.service;
 
 import hu.nye.futarfalatok.dto.DishDTO;
 import hu.nye.futarfalatok.dto.RestaurantDTO;
+import hu.nye.futarfalatok.dto.RestaurantRequestDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,9 +16,9 @@ public interface RestaurantService {
 
     Optional<Set<DishDTO>> getDishesByRestaurantId(Long restaurantId);
 
-    RestaurantDTO createRestaurant(RestaurantDTO restaurantDTO);
+    RestaurantDTO createRestaurant(RestaurantRequestDTO restaurantRequestDTO);
 
-    RestaurantDTO updateRestaurant(RestaurantDTO restaurantDTO);
+    RestaurantDTO updateRestaurant(RestaurantRequestDTO restaurantRequestDTO);
 
     void deleteRestaurant(Long id);
 }

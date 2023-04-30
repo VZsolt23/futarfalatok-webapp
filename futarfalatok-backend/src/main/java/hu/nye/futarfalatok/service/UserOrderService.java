@@ -1,6 +1,7 @@
 package hu.nye.futarfalatok.service;
 
 import hu.nye.futarfalatok.dto.DishDTO;
+import hu.nye.futarfalatok.dto.OrderRequestDTO;
 import hu.nye.futarfalatok.dto.UserOrderDTO;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface UserOrderService {
 
     Optional<Set<DishDTO>> getDishesByOrderId(Long orderId);
 
-    UserOrderDTO createUserOrder(UserOrderDTO userOrderDTO);
+    UserOrderDTO createUserOrder(OrderRequestDTO orderRequestDTO);
 
     UserOrderDTO updateUserOrder(UserOrderDTO userOrderDTO);
 

@@ -24,16 +24,18 @@ public class JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public String generateToken(UserDetails userDetails, Role role) {
-        return generateToken(new HashMap<>(), userDetails, role);
+    public String generateToken(UserDetails userDetails, Role role, Long id) {
+        return generateToken(new HashMap<>(), userDetails, role, id);
     }
 
     public String generateToken(
             Map<String, Object> extraClaims,
             UserDetails userDetails,
-            Role role
+            Role role,
+            Long id
     ) {
         extraClaims.put("role", role);
+        extraClaims.put("user_id", id);
         return Jwts
                 .builder()
                 .setClaims(extraClaims)

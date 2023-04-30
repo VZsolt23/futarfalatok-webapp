@@ -1,6 +1,7 @@
 package hu.nye.futarfalatok.service.impl;
 
 import hu.nye.futarfalatok.dto.DishDTO;
+import hu.nye.futarfalatok.dto.DishRequestDTO;
 import hu.nye.futarfalatok.entity.Dish;
 import hu.nye.futarfalatok.exception.DishNotFound;
 import hu.nye.futarfalatok.repository.DishRepository;
@@ -39,24 +40,34 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public DishDTO createDish(DishDTO dishDTO) {
-        Dish dish = modelMapper.map(dishDTO, Dish.class);
-        Dish savedDish = dishRepository.save(dish);
+    public DishDTO createDish(DishRequestDTO dishRequestDTO) {
+
+        Dish newDish = new Dish();
+        newDish.setName(dishRequestDTO.getName());
+        newDish.setCourse(dishRequestDTO.getCourse());
+        newDish.setCalories(dishRequestDTO.getCalories());
+        newDish.setProtein(dishRequestDTO.getProtein());
+        newDish.setCarbohydrates(dishRequestDTO.getCarbohydrates());
+        newDish.setFat(dishRequestDTO.getFat());
+
+        Dish savedDish = dishRepository.save(newDish);
 
         return modelMapper.map(savedDish, DishDTO.class);
     }
 
     @Override
-    public DishDTO updateDish(DishDTO dishDTO) {
-        Long id = dishDTO.getId();
-        Optional<Dish> dish = dishRepository.findById(id);
+    public DishDTO updateDish(DishRequestDTO dishRequestDTO) {
+        Long id = dishRequestDTO.getId();
+        Dish dish = dishRepository.findById(id).get();
 
-        if (dish.isEmpty()) {
-            throw new DishNotFound("Given dish is not found: " + id);
-        }
+        dish.setName(dishRequestDTO.getName());
+        dish.setCourse(dishRequestDTO.getCourse());
+        dish.setCalories(dishRequestDTO.getCalories());
+        dish.setProtein(dishRequestDTO.getProtein());
+        dish.setCarbohydrates(dishRequestDTO.getCarbohydrates());
+        dish.setFat(dishRequestDTO.getFat());
 
-        Dish updateDish = modelMapper.map(dishDTO, Dish.class);
-        Dish savedDish = dishRepository.save(updateDish);
+        Dish savedDish = dishRepository.save(dish);
 
         return modelMapper.map(savedDish, DishDTO.class);
     }
