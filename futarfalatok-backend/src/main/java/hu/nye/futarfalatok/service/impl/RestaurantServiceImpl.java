@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
 
-    private RestaurantRepository restaurantRepository;
+    private final RestaurantRepository restaurantRepository;
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
 
     public RestaurantServiceImpl(RestaurantRepository restaurantRepository, ModelMapper modelMapper) {

@@ -24,24 +24,22 @@ public class JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public String generateToken(UserDetails userDetails, Role role, Long id) {
-        return generateToken(new HashMap<>(), userDetails, role, id);
+    public String generateToken(UserDetails userDetails, Role role) {
+        return generateToken(new HashMap<>(), userDetails, role);
     }
 
     public String generateToken(
             Map<String, Object> extraClaims,
             UserDetails userDetails,
-            Role role,
-            Long id
+            Role role
     ) {
         extraClaims.put("role", role);
-        extraClaims.put("user_id", id);
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24 * 10))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

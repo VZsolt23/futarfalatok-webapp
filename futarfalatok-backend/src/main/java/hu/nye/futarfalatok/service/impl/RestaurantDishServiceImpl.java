@@ -20,13 +20,13 @@ import java.util.stream.Collectors;
 @Service
 public class RestaurantDishServiceImpl implements RestaurantDishService {
 
-    private RestaurantDishRepository repository;
+    private final RestaurantDishRepository repository;
 
-    private RestaurantRepository restaurantRepository;
+    private final RestaurantRepository restaurantRepository;
 
-    private DishRepository dishRepository;
+    private final DishRepository dishRepository;
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public RestaurantDishServiceImpl(RestaurantDishRepository repository, RestaurantRepository restaurantRepository, DishRepository dishRepository, ModelMapper modelMapper) {
         this.repository = repository;

@@ -31,7 +31,7 @@ public class AuthenticationService {
                 .build();
 
         var savedUser = userRepository.save(user);
-        var jwtToken = jwtService.generateToken(user, user.getRole(), user.getId());
+        var jwtToken = jwtService.generateToken(user, user.getRole());
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
@@ -47,7 +47,7 @@ public class AuthenticationService {
 
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UserNotFound("User not found with email: " + request.getEmail()));
-        var jwtToken = jwtService.generateToken(user, user.getRole(), user.getId());
+        var jwtToken = jwtService.generateToken(user, user.getRole());
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .role(user.getRole())

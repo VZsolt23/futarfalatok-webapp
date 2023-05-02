@@ -22,7 +22,7 @@ const Home = () => {
       <div className="container p-5">
         <h1>Üdvözöl a FutárFalatok weboldal!</h1>
         <h2>Gyors és minőségi kiszállítás!</h2>
-        <h3>Itt az első három étterem, de több is van!</h3>
+        <h3>Itt van néhány étterem, de több is van!</h3>
         <CardGroup className="p-3">
         {restaurants.slice(0,3).map((restaurant) => (
         <Card key={restaurant.id} className="m-2" style={{ width: '100%' }}>
