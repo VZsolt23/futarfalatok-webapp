@@ -61,7 +61,6 @@ const RestaurantDetail = () => {
     }
   })
 
-  //---------------------------------------------------------------
   const handleOrderItems = async () => {
     if (!isLoggedIn) {
       navigate("/login");
@@ -83,7 +82,6 @@ const RestaurantDetail = () => {
       }
     }
   };
-  //---------------------------------------------------------------
 
   const handleSubmit = () => {
     try {
